@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import { initializeAgoraClient } from '../utils/agoraUtils';
-import config from '../config';
+import config from './config';
 
 const LiveStream = () => {
   const [client, setClient] = useState(null);

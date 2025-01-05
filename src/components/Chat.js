@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { initializeRTMClient } from '../utils/agoraUtils';
-import config from '../config';  // Fixed import path
+import config from './config';  // Fixed import path
 
 const Chat = () => {
   const [client, setClient] = useState(null);

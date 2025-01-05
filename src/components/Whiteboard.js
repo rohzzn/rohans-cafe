@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { WhiteWebSdk, DeviceType } from '@netless/white-web-sdk';
-import config from '../config';
+import config from './config';
 
 const Whiteboard = () => {
   const [room, setRoom] = useState(null);
