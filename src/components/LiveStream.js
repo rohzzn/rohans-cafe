@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from 'react';
+// src/components/LiveStream.js
+import React, { useState, useEffect, useCallback } from 'react';
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import { initializeAgoraClient } from '../utils/agoraUtils';
-import config from './config';
+import config from '../config';  // Fixed import path
 
 const LiveStream = () => {
   const [client, setClient] = useState(null);
   const [localTracks, setLocalTracks] = useState({ audio: null, video: null });
   const [isStreaming, setIsStreaming] = useState(false);
+
+  const cleanup = useCallback(() => {
+    if (localTracks) {
+      Object.values(localTracks).forEach(track => track?.close());
+    }
+    if (client) {
+      client.leave();
+    }
+  }, [client, localTracks]);
 
   useEffect(() => {
     const init = async () => {
@@ -18,11 +28,8 @@ const LiveStream = () => {
     };
     init();
 
-    return () => {
-      Object.values(localTracks).forEach(track => track?.close());
-      client?.leave();
-    };
-  }, []);
+    return cleanup;
+  }, [cleanup]);
 
   const startStream = async () => {
     try {
@@ -45,15 +52,14 @@ const LiveStream = () => {
   };
 
   const stopStream = async () => {
-    Object.values(localTracks).forEach(track => track?.close());
-    await client?.leave();
+    cleanup();
     setIsStreaming(false);
   };
 
   return (
     <div>
       <h2>Live Stream</h2>
-      <div id="local-stream" style={{ width: '640px', height: '360px' }}></div>
+      <div id="local-stream" className="video-player"></div>
       {!isStreaming ? (
         <button onClick={startStream}>Start Streaming</button>
       ) : (
