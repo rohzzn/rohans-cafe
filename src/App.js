@@ -3,7 +3,6 @@ import VoiceCall from './components/VoiceCall';
 import VideoCall from './components/VideoCall';
 import LiveStream from './components/LiveStream';
 import Chat from './components/Chat';
-import Whiteboard from './components/Whiteboard';
 import './App.css';
 
 const App = () => {
@@ -22,9 +21,6 @@ const App = () => {
         </div>
         <div className="feature-card">
           <Chat />
-        </div>
-        <div className="feature-card whiteboard-card">
-          <Whiteboard />
         </div>
       </div>
     </div>

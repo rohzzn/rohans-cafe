@@ -1,6 +1,6 @@
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import AgoraRTM from 'agora-rtm-sdk';
-import config from './config';
+import config from '../config';
 
 // Initialize Agora client
 export const initializeAgoraClient = () => {
